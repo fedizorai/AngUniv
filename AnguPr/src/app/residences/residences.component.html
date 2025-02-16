@@ -1,0 +1,59 @@
+<div class="residences-container">
+  <input
+    type="text"
+    class="search-input"
+    placeholder="Rechercher par adresse"
+    [(ngModel)]="searchAddress"
+  />
+
+  <div *ngFor="let residence of listResidences">
+    <ng-container
+      *ngIf="
+        !searchAddress ||
+        (residence.address &&
+          residence.address.toLowerCase().includes(searchAddress.toLowerCase()))
+      "
+    >
+      <div class="residence-card">
+        <img [src]="residence.image" alt="{{ residence.name }}" />
+        <div class="residence-details">
+          <h3>{{ residence.name }}</h3>
+          <p>Address: {{ residence.address }}</p>
+          <div [ngSwitch]="residence.status">
+            <span
+              *ngSwitchCase="'Disponible'"
+              class="status disponible"
+              >Disponible</span
+            >
+            <span
+              *ngSwitchCase="'En Construction'"
+              class="status en-construction"
+              >En Construction</span
+            >
+            <span *ngSwitchCase="'Vendu'" class="status vendu">Vendu</span>
+            <span *ngSwitchDefault class="status">Status inconnu</span>
+          </div>
+          <div>
+            <button
+              class="show-location"
+              (click)="onShowLocation(residence)"
+            >
+              Show Location
+            </button>
+            <button class="like" (click)="onLike(residence)">Like</button>
+          </div>
+          <div *ngIf="showAddressMap[residence.id]">
+            <p>Address: {{ residence.address }}</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="favorites">
+    <h3>Favoris</h3>
+    <ul>
+      <li *ngFor="let fav of favorites">{{ fav.name }}</li>
+    </ul>
+  </div>
+</div>
