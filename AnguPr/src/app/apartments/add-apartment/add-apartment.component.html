@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>Ajouter un appartement</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="apartNum">Numéro d'appartement</label>
+      <input type="number" id="apartNum" [(ngModel)]="apartment.apartNum" name="apartNum" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+      <label for="floorNum">Numéro de l'étage</label>
+      <input type="number" id="floorNum" [(ngModel)]="apartment.floorNum" name="floorNum" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+      <label for="surface">Surface</label>
+      <input type="number" id="surface" [(ngModel)]="apartment.surface" name="surface" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+      <label for="terrace">Terrasse</label>
+      <input type="checkbox" id="terrace" [(ngModel)]="apartment.terrace" name="terrace" class="form-check-input" />
+    </div>
+
+    <div class="form-group">
+      <label for="surfaceterrace">Surface de la terrasse</label>
+      <input type="number" id="surfaceterrace" [(ngModel)]="apartment.surfaceterrace" name="surfaceterrace" class="form-control" [disabled]="!apartment.terrace" />
+    </div>
+
+    <div class="form-group">
+      <label for="category">Catégorie</label>
+      <input type="text" id="category" [(ngModel)]="apartment.category" name="category" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+      <label for="ResidenceId">ID Résidence</label>
+      <input type="number" id="ResidenceId" [(ngModel)]="apartment.ResidenceId" name="ResidenceId" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter l'appartement</button>
+  </form>
+</div>

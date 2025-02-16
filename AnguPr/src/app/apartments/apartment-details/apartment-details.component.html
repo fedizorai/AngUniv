@@ -1,0 +1,10 @@
+<div *ngIf="apartment">
+    <h2>Détails de l'appartement</h2>
+    <p><strong>Numéro d'appartement:</strong> {{ apartment.apartNum }}</p>
+    <p><strong>Numéro de l'étage:</strong> {{ apartment.floorNum }}</p>
+    <p><strong>Surface:</strong> {{ apartment.surface }} m²</p>
+    <p><strong>Terrasse:</strong> {{ apartment.terrace ? 'Oui' : 'Non' }}</p>
+    <p><strong>Surface de la terrasse:</strong> {{ apartment.surfaceterrace }} m²</p>
+    <p><strong>Catégorie:</strong> {{ apartment.category }}</p>
+  </div>
+  

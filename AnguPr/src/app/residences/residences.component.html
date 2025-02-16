@@ -1,59 +1,65 @@
-<div class="residences-container">
-  <input
-    type="text"
-    class="search-input"
-    placeholder="Rechercher par adresse"
-    [(ngModel)]="searchAddress"
-  />
+<div style="margin-bottom: 20px; text-align: center;">
+  <input 
+    type="text" 
+    placeholder="Rechercher par adresse..." 
+    [(ngModel)]="searchAddress" 
+    style="padding: 8px; width: 60%; border-radius: 5px; border: 1px solid #ccc;">
+</div>
 
-  <div *ngFor="let residence of listResidences">
-    <ng-container
-      *ngIf="
-        !searchAddress ||
-        (residence.address &&
-          residence.address.toLowerCase().includes(searchAddress.toLowerCase()))
-      "
-    >
-      <div class="residence-card">
-        <img [src]="residence.image" alt="{{ residence.name }}" />
-        <div class="residence-details">
-          <h3>{{ residence.name }}</h3>
-          <p>Address: {{ residence.address }}</p>
-          <div [ngSwitch]="residence.status">
-            <span
-              *ngSwitchCase="'Disponible'"
-              class="status disponible"
-              >Disponible</span
-            >
-            <span
-              *ngSwitchCase="'En Construction'"
-              class="status en-construction"
-              >En Construction</span
-            >
-            <span *ngSwitchCase="'Vendu'" class="status vendu">Vendu</span>
-            <span *ngSwitchDefault class="status">Status inconnu</span>
-          </div>
-          <div>
-            <button
-              class="show-location"
-              (click)="onShowLocation(residence)"
-            >
-              Show Location
-            </button>
-            <button class="like" (click)="onLike(residence)">Like</button>
-          </div>
-          <div *ngIf="showAddressMap[residence.id]">
-            <p>Address: {{ residence.address }}</p>
-          </div>
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+  <ng-container *ngFor="let residence of listResidences">
+    
+    <ng-container *ngIf="!searchAddress || (residence.address && residence.address.toLowerCase().includes(searchAddress.toLowerCase()))">
+      
+      <div style="border: 1px solid #ddd; border-radius: 8px; margin: 10px; padding: 15px; width: 300px; text-align: center; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
+        
+        <h3 style="color: #333;">{{ residence.name }}</h3>
+
+        <img [src]="residence.image" alt="{{ residence.name }}" width="100%" style="border-radius: 5px;">
+
+        <div [ngSwitch]="residence.status" style="margin-top: 10px;">
+          <span *ngSwitchCase="'Disponible'" style="color: green; font-weight: bold;">Disponible</span>
+          <span *ngSwitchCase="'En Construction'" style="color: orange; font-weight: bold;">En Construction</span>
+          <span *ngSwitchCase="'Vendu'" style="color: red; font-weight: bold;">Vendu</span>
+          <span *ngSwitchDefault style="color: gray;">Status inconnu</span>
         </div>
-      </div>
-    </ng-container>
-  </div>
 
-  <div class="favorites">
-    <h3>Favoris</h3>
-    <ul>
-      <li *ngFor="let fav of favorites">{{ fav.name }}</li>
-    </ul>
-  </div>
+        <button (click)="onShowLocation(residence)" 
+                style="margin-top: 10px; background-color: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 5px;">
+          Afficher l'adresse
+        </button>
+
+        <div *ngIf="showAddressMap[residence.id]" style="margin-top: 5px;">
+          <p><strong>Adresse :</strong> {{ residence.address }}</p>
+        </div>
+
+        <button (click)="onLike(residence)" 
+                style="background-color: #28a745; color: white; border: none; padding: 5px 10px; border-radius: 5px; margin-top: 5px;">
+          Ajouter aux favoris ❤️
+        </button>
+
+        <button [routerLink]="['/residences', residence.id]" 
+                style="background-color: #ffc107; color: black; border: none; padding: 5px 10px; border-radius: 5px; margin-top: 5px;">
+          Détails
+        </button>
+
+        <button [routerLink]="['/apartments-by-residence', residence.id]" 
+                style="background-color: #17a2b8; color: white; border: none; padding: 5px 10px; border-radius: 5px; margin-top: 5px;">
+          Appartements List 🏢
+        </button>
+
+      </div>
+
+    </ng-container>
+  </ng-container>
+</div>
+
+<div style="margin-top: 30px; text-align: center;">
+  <h3>⭐ Favoris</h3>
+  <ul style="list-style: none; padding: 0;">
+    <li *ngFor="let fav of favorites" 
+        style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin: 5px auto; width: 200px;">
+      {{ fav.name }}
+    </li>
+  </ul>
 </div>

@@ -1,0 +1,33 @@
+<div class="container">
+    <h2>Liste des appartements</h2>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Numéro</th>
+          <th>Étage</th>
+          <th>Surface</th>
+          <th>Terrasse</th>
+          <th>Catégorie</th>
+          <th>Résidence</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let apartment of apartments">
+          <td>{{ apartment.apartNum }}</td>
+          <td>{{ apartment.floorNum }}</td>
+          <td>{{ apartment.surface }} m²</td>
+          <td>{{ apartment.terrace ? 'Oui' : 'Non' }}</td>
+          <td>{{ apartment.category }}</td>
+          <td>{{ apartment.ResidenceId }}</td>
+          <td>
+            <button class="btn btn-info" (click)="viewApartmentDetails(apartment)">Voir Détails</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <button class="btn btn-primary" routerLink="/apartments/add">Ajouter un appartement</button>
+  </div>
+  
